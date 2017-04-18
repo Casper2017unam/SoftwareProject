@@ -1,0 +1,40 @@
+<?
+	
+	
+	
+	
+	
+	
+	 session_start();
+ 
+  //connect to database
+  $db = mysqli_connect("localhost" , "root" , "", "schoolCouncil");
+	
+	
+	
+	if(isset($_POST['register btn'])){
+	  session_start();
+	  $username = mysql_real_escape_string($_POST['username']);
+	  $email = mysql_real_escape_string($_POST['email']);
+	  $password = mysql_real_escape_string($_POST['password']);
+	  $password2 = mysql_real_escape_string($_POST['password2']);
+	  
+	  if($password == $password2){
+		  //create user
+		  $password = md5($password); // hashed password before storing for security purposes
+	      $sql = "INSERT INTO `users` (username, email, password) VALUES('$username','$email','$password')"; 
+		  mysqli_query($db, $sql);
+		  $_session['message'] = "logged in";
+	      $_session['username'] = $username;
+		  header("location: index.html"); //redirect to homepage
+	   }else{
+	      $_session['message'] = "The two passwords do not match";
+		 
+	   }
+	  
+   }
+	
+	
+	
+	?>
+	

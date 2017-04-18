@@ -1,0 +1,41 @@
+// mysqli_connect
+//mysqli_query
+//mysqli_fetch_array
+//mysqli_close
+
+
+
+ <?php
+//step1
+//root
+ $db = mysqli_connect('localhost' , 'username' , 'password', 'database_name')
+  or die('Error connecting to MySQL server.');
+?>
+
+<html>
+<head>
+</head>
+<body>
+<h1>PHP connect to MySQL</h1>
+
+<?php
+//step2
+$query = "SELECT * FROM table_name";
+mysqli_query($db, $query) or die('Error querying database.');
+
+//step3
+
+$result = mysqli_query($db, $query);
+$row = mysqli_fetch_array($result);
+
+while($row = mysqli_fetch_array($result))
+{
+echo $row['first_name'] . ' ' . $row['last_name'] . ': ' . $row['email'] . ' ' . $row['city']
+.'<br/ >';
+}
+//step 4
+mysqli_close($db);
+?>
+
+</body>
+</html>
